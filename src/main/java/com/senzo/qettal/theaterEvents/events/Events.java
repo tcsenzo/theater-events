@@ -6,4 +6,5 @@ public interface Events {
 
 	List<Event> all();
 
+	void save(Event event);
 }

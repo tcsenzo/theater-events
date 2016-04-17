@@ -1,10 +1,9 @@
 package com.senzo.qettal.theaterEvents.events;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +16,13 @@ public class EventDAO implements Events{
 	
 	@Override
 	public List<Event> all() {
-		return Arrays.asList(new Event("peca marota", "uma peca suber pacana, vc vai amar", new BigDecimal("200.00")));
+		return em.createQuery("from Event", Event.class).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public void save(Event event) {
+		em.persist(event);
 	}
 
 }

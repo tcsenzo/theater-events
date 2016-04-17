@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="event")
 public class Event {
 
 	@Id
@@ -16,6 +18,12 @@ public class Event {
 	private String name;
 	private String description;
 	private BigDecimal price;
+	
+	/**
+	 * @deprecated Hibernate eyes only
+	 */
+	Event() {
+	}
 	
 	public Event(String name, String description, BigDecimal price) {
 		this.name = name;
