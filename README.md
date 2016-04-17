@@ -19,7 +19,7 @@ mysql -u root theaterEvents < base.sql
 Post example:
 
 ```
- curl -H "Content-Type:application/json" -X POST http://localhost:8080/events/create --data "{\"name\" : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"price\": \"22.0\"} "
+curl -H "Content-Type:application/json" -X POST : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"price\": \"22.0\", \"scheduled_date\": \"2017-12-03T10:15:30\"} "
 ```
 
 Get example:

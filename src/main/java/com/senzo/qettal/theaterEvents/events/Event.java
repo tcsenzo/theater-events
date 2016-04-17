@@ -1,7 +1,9 @@
 package com.senzo.qettal.theaterEvents.events;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,10 @@ public class Event {
 	private String name;
 	private String description;
 	private BigDecimal price;
+	@Column(name="scheduled_date")
+	private LocalDateTime scheduledDate;
+	@Column(name="created_at")
+	private LocalDateTime createdAt = LocalDateTime.now();
 	
 	/**
 	 * @deprecated Hibernate eyes only
@@ -25,10 +31,11 @@ public class Event {
 	Event() {
 	}
 	
-	public Event(String name, String description, BigDecimal price) {
+	public Event(String name, String description, BigDecimal price, LocalDateTime scheduledDate) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
+		this.scheduledDate = scheduledDate;
 	}
 
 	public String getName() {
@@ -41,6 +48,10 @@ public class Event {
 
 	public BigDecimal getPrice() {
 		return this.price;
+	}
+
+	public LocalDateTime getScheduledDate() {
+		return scheduledDate;
 	}
 
 }

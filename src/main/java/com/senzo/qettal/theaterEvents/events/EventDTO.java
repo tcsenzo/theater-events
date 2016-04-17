@@ -1,15 +1,22 @@
 package com.senzo.qettal.theaterEvents.events;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize
 public class EventDTO {
 
+	@JsonProperty
 	private String name;
+	@JsonProperty
 	private String description;
+	@JsonProperty
 	private BigDecimal price;
+	@JsonProperty("scheduled_date")
+	private LocalDateTime scheduledDate;
 	
 	/**
 	 * @deprecated Jackson eyes only
@@ -17,25 +24,14 @@ public class EventDTO {
 	EventDTO() {
 	}
 	
-	public EventDTO(String name, String description, BigDecimal price) {
+	public EventDTO(String name, String description, BigDecimal price, LocalDateTime scheduledDate) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
-	}
-
-	public String getName() {
-		return name;
+		this.scheduledDate = scheduledDate;
 	}
 	
-	public String getDescription() {
-		return description;
-	}
-	
-	public BigDecimal getPrice() {
-		return price;
-	}
-
 	public Event toEvent() {
-		return new Event(name, description, price);
+		return new Event(name, description, price, scheduledDate);
 	}
 }

@@ -1,11 +1,9 @@
 package com.senzo.qettal.theaterEvents.events;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
@@ -28,11 +26,7 @@ public class EventListDTO {
 	}
 
 	private void addAll(List<Event> events) {
-		eventDTOs = events.stream().map(e -> new EventDTO(e.getName(), e.getDescription(), e.getPrice())).collect(Collectors.toList());
-	}
-	
-	public List<EventDTO> getEventDTOs() {
-		return eventDTOs;
+		eventDTOs = events.stream().map(e -> new EventDTO(e.getName(), e.getDescription(), e.getPrice(), e.getScheduledDate())).collect(Collectors.toList());
 	}
 	
 }
