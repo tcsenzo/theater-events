@@ -16,7 +16,7 @@ public class EventController {
 	@Autowired
 	private Events events;
 	
-	@RequestMapping("/")
+	@RequestMapping
 	public EventListDTO list() {
 		return EventListDTO.from(events.all());
 	}

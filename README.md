@@ -9,7 +9,7 @@ mysql -u root theaterEvents < base.sql
 
 ## How to run
 
-- If you have the project imported, just run the class com.senzo.qettal.theaterEvents.Application 
+- If you have the project imported, just run the class com.senzo.qettal.theaterEvents.EventsApplication 
 - If you don't, run 'mvn spring-boot:run' at your terminal
 
 ## How to test
@@ -24,5 +24,5 @@ curl -H "Content-Type:application/json" -X POST : \"Evento maroto\", \"descripti
 
 Get example:
 ```
-curl http://localhost:8080/events/
+curl http://localhost:8080/events
 ```
