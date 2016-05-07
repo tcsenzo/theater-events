@@ -1,4 +1,4 @@
-package com.senzo.qettal.theaterEvents.events;
+package com.senzo.qettal.events;
 
 import java.util.List;
 
