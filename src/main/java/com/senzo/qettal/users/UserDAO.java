@@ -1,6 +1,6 @@
 package com.senzo.qettal.users;
 
-import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -16,14 +16,16 @@ public class UserDAO implements Users {
 	
 	@Override
 	@Transactional
-	public User save(User theater) {
-		em.persist(theater);
-		return theater;
+	public User save(User user) {
+		em.persist(user);
+		return user;
 	}
 
 	@Override
-	public List<User> all() {
-		return em.createQuery("from Theater", User.class).getResultList();
+	public Optional<User> findByEmail(String email) {
+		return Optional.ofNullable(em.createQuery("from User where email = :email", User.class)
+			.setParameter("email", email)
+			.getSingleResult());
 	}
 
 }

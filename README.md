@@ -14,6 +14,32 @@ mysql -u root theaterEvents < base.sql
 
  If you don't have an application to test with, use curl sending a json with the structure provided bellow:
 
+
+## User
+
+### How to create one
+
+- Json template:
+
+```json
+{
+	"name": "Leonardo",
+	"email": "leo@leo.com",
+	"password": "123",
+}
+```
+
+Example: 
+
+```bash
+ curl -H "Content-Type:application/json" -X POST http://localhost:8080/users --data "{\"name\": \"Leonardo\", \"email\": \"leo@leo.com\", \"password\": \"123\"}"
+```
+
+Possible responses:
+
+202 - User created
+400 - Invalid or insufficient data
+
 ## Theaters
 
 ### How to create one
@@ -38,7 +64,7 @@ mysql -u root theaterEvents < base.sql
 Example:
 
 ```bash
-curl -H "Content-Type:application/json" -X POST http://localhost:8080/theaters/create --data "{\"name\": \"Teatro NET SP\", \"address\": {	\"street\": \"Rua Olimpíadas\", \"number\": \"360\", \"district\": \"Vila Olimpia\", \"city\": \"São Paulo\", \"state\": \"SP\", \"country\": \"Brasil\", \"zip_code\": \"04551-000\"}}"
+curl -H "Content-Type:application/json" -X POST http://localhost:8080/theaters --data "{\"name\": \"Teatro NET SP\", \"address\": {	\"street\": \"Rua Olimpíadas\", \"number\": \"360\", \"district\": \"Vila Olimpia\", \"city\": \"São Paulo\", \"state\": \"SP\", \"country\": \"Brasil\", \"zip_code\": \"04551-000\"}}"
 ```
 
 Possible responses:
@@ -91,7 +117,7 @@ The response will be a json in as the one bellow:
 Example:
 
 ```bash
-curl -H "Content-Type:application/json" -X POST http://localhost:8080/events/create --data "{\"name\" : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"price\": \"22.0\", \"scheduled_date\": \"2017-12-03T10:15:30\", \"theater\": {\"id\":1}}"
+curl -H "Content-Type:application/json" -X POST http://localhost:8080/events --data "{\"name\" : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"price\": \"22.0\", \"scheduled_date\": \"2017-12-03T10:15:30\", \"theater\": {\"id\":1}}"
 ```
 
 You can also send the theater information if it doesn't already exists on this service's database:

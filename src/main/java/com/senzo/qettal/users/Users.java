@@ -1,8 +1,9 @@
 package com.senzo.qettal.users;
 
-import java.util.List;
+import java.util.Optional;
+
 
 public interface Users {
 	User save(User user);
-	List<User> all();
+	Optional<User> findByEmail(String email);
 }

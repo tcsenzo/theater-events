@@ -18,7 +18,7 @@ public class UserController {
 	@Autowired
 	private Users users;
 	
-	@RequestMapping(value = "/create", method = POST)
+	@RequestMapping(method = POST)
 	public ResponseEntity<String> create(@Valid @RequestBody UserDTO user){
 		user
 			.toModel()
