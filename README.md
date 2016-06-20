@@ -25,7 +25,7 @@ mysql -u root theaterEvents < base.sql
 {
 	"name": "Leonardo",
 	"email": "leo@leo.com",
-	"password": "123",
+	"password": "123"
 }
 ```
 
@@ -39,6 +39,21 @@ Possible responses:
 
 202 - User created
 400 - Invalid or insufficient data
+
+
+## Login
+
+After you create an user, you have to log in to be able to access any other resources
+
+## How to
+
+Example:
+
+```bash
+curl -X POST -c /tmp/cookies.txt  http://localhost:8080/login -d email=leocwolter@gmail.com -d password=123
+```
+
+This will create a file with your cookies at /tmp/cookies.txt, you will need to send this file in each request to prove you are authenticated
 
 ## Theaters
 
@@ -64,7 +79,7 @@ Possible responses:
 Example:
 
 ```bash
-curl -H "Content-Type:application/json" -X POST http://localhost:8080/theaters --data "{\"name\": \"Teatro NET SP\", \"address\": {	\"street\": \"Rua Olimpíadas\", \"number\": \"360\", \"district\": \"Vila Olimpia\", \"city\": \"São Paulo\", \"state\": \"SP\", \"country\": \"Brasil\", \"zip_code\": \"04551-000\"}}"
+curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X POST http://localhost:8080/theaters --data "{\"name\": \"Teatro NET SP\", \"address\": {	\"street\": \"Rua Olimpíadas\", \"number\": \"360\", \"district\": \"Vila Olimpia\", \"city\": \"São Paulo\", \"state\": \"SP\", \"country\": \"Brasil\", \"zip_code\": \"04551-000\"}}"
 ```
 
 Possible responses:
@@ -77,7 +92,7 @@ Possible responses:
 Example:
 
 ```bash
-curl http://localhost:8080/theaters
+curl -b /tmp/cookies.txt http://localhost:8080/theaters
 ```
 
 The response will be a json in as the one bellow:
@@ -117,7 +132,7 @@ The response will be a json in as the one bellow:
 Example:
 
 ```bash
-curl -H "Content-Type:application/json" -X POST http://localhost:8080/events --data "{\"name\" : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"price\": \"22.0\", \"scheduled_date\": \"2017-12-03T10:15:30\", \"theater\": {\"id\":1}}"
+curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X POST http://localhost:8080/events --data "{\"name\" : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"price\": \"22.0\", \"scheduled_date\": \"2017-12-03T10:15:30\", \"theater\": {\"id\":1}}"
 ```
 
 You can also send the theater information if it doesn't already exists on this service's database:
@@ -153,7 +168,7 @@ Possible responses:
 
 List example:
 ```bash
-curl http://localhost:8080/events
+curl -b /tmp/cookies.txt http://localhost:8080/events
 ```
 
 The response will be a json in as the one bellow:
