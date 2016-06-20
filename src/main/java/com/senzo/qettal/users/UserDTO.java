@@ -1,8 +1,6 @@
 package com.senzo.qettal.users;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -26,14 +24,8 @@ public class UserDTO {
 	UserDTO() {
 	}
 	
-	public User toModel() {
-		try {
-			byte[] passwordBytes = password.getBytes("UTF-8");
-			byte[] hashedPassword = MessageDigest.getInstance("SHA-256").digest(passwordBytes);
-			return new User(name, email, new String(hashedPassword));
-		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-			throw new RuntimeException("Coulndn't hash the password of the user " + email, e);
-		}
+	public User toModel(PasswordEncoder encoder) {
+		return new User(name, email, encoder.encode(password));
 	}
 
 }
