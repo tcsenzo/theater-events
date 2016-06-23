@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.security.access.prepost.PreFilter;
+
 import com.senzo.qettal.theater.Theater;
 
 @Entity
@@ -71,5 +73,5 @@ public class Event {
 	public Theater getTheater() {
 		return theater;
 	}
-
+	
 }

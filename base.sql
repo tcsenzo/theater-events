@@ -9,7 +9,6 @@ create table `user` (
 	created_at datetime not null
 );
 
-
 drop table if exists theater;
 create table theater (
 	id bigint(20) not null primary key auto_increment,
@@ -22,7 +21,9 @@ create table theater (
 	state varchar(255) not null,
 	country varchar(255) not null,
 	zip_code varchar(255) not null,
-	created_at datetime not null
+	owner_id bigint(20) not null,
+	created_at datetime not null,
+	CONSTRAINT owner_id_fk FOREIGN KEY (owner_id) REFERENCES `user`(id)
 );
 
 drop table if exists event;

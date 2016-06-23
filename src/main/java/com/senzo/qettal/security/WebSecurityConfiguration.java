@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,6 +21,7 @@ import com.senzo.qettal.users.Users;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private Users users;
@@ -29,7 +31,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -50,6 +51,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 				.and().authorizeRequests()
 						.antMatchers(HttpMethod.POST, "/users").permitAll()
+						.antMatchers(HttpMethod.GET, "/events").permitAll()
 						.anyRequest().authenticated()
 				
 				.and().formLogin()

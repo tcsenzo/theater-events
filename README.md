@@ -5,6 +5,7 @@
 ```bash
 mysql -u root theaterEvents < base.sql
 ``` 
+
 ## How to run
 
 - If you have the project imported, just run the class com.senzo.qettal.theaterEvents.EventsApplication 
@@ -37,8 +38,8 @@ Example:
 
 Possible responses:
 
-202 - User created
-400 - Invalid or insufficient data
+- 202 - User created
+- 400 - Invalid or insufficient data
 
 
 ## Login
@@ -50,14 +51,16 @@ After you create an user, you have to log in to be able to access any other reso
 Example:
 
 ```bash
-curl -X POST -c /tmp/cookies.txt  http://localhost:8080/login -d email=leocwolter@gmail.com -d password=123
+curl -X POST -c /tmp/cookies.txt  http://localhost:8080/login -d email=leo@leo.com -d password=123
 ```
 
 This will create a file with your cookies at /tmp/cookies.txt, you will need to send this file in each request to prove you are authenticated
 
+**All endpoints marked with (REQUIRES LOGIN) bellow will return 401 if you are not logged in**
+
 ## Theaters
 
-### How to create one
+### How to create one (REQUIRES LOGIN)
 
 - Json template:
 
@@ -84,10 +87,10 @@ curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X POST http://local
 
 Possible responses:
 
-202 - Theater created
-400 - Invalid or insufficient data
+- 202 - Theater created
+- 400 - Invalid or insufficient data
 
-### How to list all the theaters
+### How to list all the theaters (REQUIRES LOGIN)
 
 Example:
 
@@ -115,7 +118,7 @@ The response will be a json in as the one bellow:
 
 ## Events
 
-### How to create one
+### How to create one (REQUIRES LOGIN)
 
 ```json
 {
@@ -160,9 +163,11 @@ You can also send the theater information if it doesn't already exists on this s
 
 Possible responses:
 
-202 - Event created
-404 - Theater not found
-400 - Invalid or insufficient data
+- 202 - Event created
+- 400 - Invalid or insufficient data
+- 403 - Forbidden (the logged user is not the theaters owner)
+- 404 - Theater not found
+
 
 ### How to list all the events
 

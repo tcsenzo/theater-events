@@ -14,12 +14,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.senzo.qettal.security.LoggedUser;
 import com.senzo.qettal.theater.Theater;
 import com.senzo.qettal.theater.TheaterDTO;
 import com.senzo.qettal.theater.Theaters;
+import com.senzo.qettal.users.User;
 
 @RestController
 @RequestMapping("/events")
@@ -30,6 +31,9 @@ public class EventController {
 	
 	@Autowired
 	private Theaters theaters;
+	
+	@Autowired
+	private LoggedUser loggedUser;
 	
 	@RequestMapping(method = GET)
 	public EventListDTO list() {
@@ -42,9 +46,11 @@ public class EventController {
 		if(!optionalTheaterDTO.isPresent())
 			return new ResponseEntity<String>(BAD_REQUEST);
 		
+		Optional<User> optionalUser = loggedUser.getUser();
+		
 		Optional<Theater> optionalTheater = optionalTheaterDTO
 			.get()
-			.toModel()
+			.toModel(optionalUser.get())
 			.findOrSave(theaters);
 		
 		if(!optionalTheater.isPresent())
