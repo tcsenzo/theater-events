@@ -176,6 +176,10 @@ List example:
 curl -b /tmp/cookies.txt http://localhost:8080/events
 ```
 
+#### Optional parameter - hours_limit
+Sets a limit in hours to the events scheduled_date
+
+
 The response will be a json in as the one bellow:
 ```json
 {
