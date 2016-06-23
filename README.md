@@ -184,6 +184,7 @@ The response will be a json in as the one bellow:
 ```json
 {
 	"events": [{
+		"id": 1,
 		"name": "LOVE IS IN THE AIR",
 		"description": "Um evento para toda a familia",
 		"price": 22.0,
@@ -201,6 +202,36 @@ The response will be a json in as the one bellow:
 		},
 		"scheduled_date": "2017-12-03T10:15:30"
 	}]
+}
+```
+
+### How to get a specific event
+
+Example:
+```bash
+curl -b /tmp/cookies.txt http://localhost:8080/events/<id>
+```
+
+The response will be a json in as the one bellow:
+```json
+{
+	"id": 1,
+	"name": "LOVE IS IN THE AIR",
+	"description": "Um evento para toda a familia",
+	"price": 22.0,
+	"theater": {
+		"name": "Teatro NET SP",
+		"address": {
+			"street": "Rua Olimpíadas",
+			"number": "360",
+			"district": "Vila Olimpia",
+			"city": "São Paulo",
+			"state": "SP",
+			"country": "Brasil",
+			"zip_code": "04551-000"
+		}
+	},
+	"scheduled_date": "2017-12-03T10:15:30"
 }
 ```
 
