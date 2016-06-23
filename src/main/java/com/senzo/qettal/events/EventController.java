@@ -2,6 +2,7 @@ package com.senzo.qettal.events;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -15,6 +16,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,13 +41,22 @@ public class EventController {
 	@Autowired
 	private LoggedUser loggedUser;
 	
+	@RequestMapping(path="/{id}", method = GET)
+	public ResponseEntity<EventDTO> show(@PathVariable("id") Long eventId) {
+		Optional<Event> optionalEvent =  events.withId(eventId);
+		if(!optionalEvent.isPresent()){
+			return new ResponseEntity<>(NOT_FOUND);
+		}
+		return new ResponseEntity<>(EventDTO.from(optionalEvent.get()), OK) ;
+	}
+	
 	@RequestMapping(method = GET)
 	public EventListDTO list(@RequestParam(name="hours_limit", required=false) Long hoursLimit) {
 		List<Event> filteredEvents;
 		if(hoursLimit == null ){
 			filteredEvents = events.all();
 		} else {
-			filteredEvents = events.thatWillHappenUntil(LocalDateTime.now().plus(hoursLimit, ChronoUnit.HOURS));
+			filteredEvents = events.thatWillHappenBefore(LocalDateTime.now().plus(hoursLimit, ChronoUnit.HOURS));
 		}
 		return EventListDTO.from(filteredEvents);
 	}

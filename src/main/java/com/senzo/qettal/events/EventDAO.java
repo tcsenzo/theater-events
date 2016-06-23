@@ -2,6 +2,7 @@ package com.senzo.qettal.events;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -22,7 +23,7 @@ public class EventDAO implements Events{
 	}
 
 	@Override
-	public List<Event> thatWillHappenUntil(LocalDateTime limit) {
+	public List<Event> thatWillHappenBefore(LocalDateTime limit) {
 		return em.createQuery("from Event where scheduledDate < :limit", Event.class)
 				.setParameter("limit", limit)
 				.getResultList();
@@ -32,6 +33,11 @@ public class EventDAO implements Events{
 	public List<Event> all() {
 		return em.createQuery("from Event", Event.class)
 				.getResultList();
+	}
+
+	@Override
+	public Optional<Event> withId(Long id) {
+		return Optional.ofNullable(em.find(Event.class, id));
 	}
 
 }

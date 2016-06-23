@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 import com.senzo.qettal.users.Users;
@@ -51,7 +50,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 				.and().authorizeRequests()
 						.antMatchers(HttpMethod.POST, "/users").permitAll()
-						.antMatchers(HttpMethod.GET, "/events").permitAll()
+						.antMatchers(HttpMethod.GET, "/events/**").permitAll()
 						.anyRequest().authenticated()
 				
 				.and().formLogin()

@@ -73,5 +73,9 @@ public class Event {
 	public Theater getTheater() {
 		return theater;
 	}
+
+	public Long getId() {
+		return id;
+	}
 	
 }

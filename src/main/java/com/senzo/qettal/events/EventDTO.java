@@ -18,6 +18,8 @@ import com.senzo.qettal.theater.TheaterDTO;
 public class EventDTO {
 
 	@JsonProperty(required=true)
+	private Long id;
+	@JsonProperty(required=true)
 	private String name;
 	@JsonProperty(required=true)
 	private String description;
@@ -34,7 +36,8 @@ public class EventDTO {
 	EventDTO() {
 	}
 	
-	private EventDTO(String name, String description, BigDecimal price, LocalDateTime scheduledDate, TheaterDTO theater) {
+	private EventDTO(Long id, String name, String description, BigDecimal price, LocalDateTime scheduledDate, TheaterDTO theater) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -44,7 +47,7 @@ public class EventDTO {
 	
 	public static EventDTO from(Event event) {
 		Theater theater = event.getTheater();
-		return new EventDTO(event.getName(), event.getDescription(), event.getPrice(), event.getScheduledDate(), TheaterDTO.from(theater));
+		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getPrice(), event.getScheduledDate(), TheaterDTO.from(theater));
 	}
 
 	public EventWithoutTheater toModel() {
