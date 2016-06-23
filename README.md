@@ -138,7 +138,7 @@ Example:
 curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X POST http://localhost:8080/events --data "{\"name\" : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"price\": \"22.0\", \"scheduled_date\": \"2017-12-03T10:15:30\", \"theater\": {\"id\":1}}"
 ```
 
-You can also send the theater information if it doesn't already exists on this service's database:
+You can also send the theater information if it doesn't already exists on this service's database: (REQUIRES LOGIN)
 
 ```json
 {
