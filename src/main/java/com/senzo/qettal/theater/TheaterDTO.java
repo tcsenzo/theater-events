@@ -1,15 +1,16 @@
 package com.senzo.qettal.theater;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.senzo.qettal.users.User;
 
 @JsonSerialize
-@JsonInclude(Include.NON_NULL)
+@JsonInclude(NON_NULL)
 public class TheaterDTO {
 
 	@JsonProperty
