@@ -1,4 +1,4 @@
-package com.senzo.qettal.events;
+package com.senzo.qettal.theater_events.events;
 
 import java.util.List;
 import java.util.stream.Collectors;

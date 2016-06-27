@@ -1,4 +1,4 @@
-package com.senzo.qettal.security;
+package com.senzo.qettal.theater_events.security;
 
 import java.io.IOException;
 

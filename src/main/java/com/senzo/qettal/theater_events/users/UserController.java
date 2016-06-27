@@ -1,4 +1,4 @@
-package com.senzo.qettal.users;
+package com.senzo.qettal.theater_events.users;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 

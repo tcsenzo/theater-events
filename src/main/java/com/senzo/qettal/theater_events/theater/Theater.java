@@ -1,4 +1,4 @@
-package com.senzo.qettal.theater;
+package com.senzo.qettal.theater_events.theater;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.senzo.qettal.users.User;
+import com.senzo.qettal.theater_events.users.User;
 
 
 @Entity

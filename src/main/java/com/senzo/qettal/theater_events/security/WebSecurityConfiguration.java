@@ -1,4 +1,4 @@
-package com.senzo.qettal.security;
+package com.senzo.qettal.theater_events.security;
 
 import java.util.Collections;
 
@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
-import com.senzo.qettal.users.Users;
+import com.senzo.qettal.theater_events.users.Users;
 
 @Configuration
 @EnableWebSecurity

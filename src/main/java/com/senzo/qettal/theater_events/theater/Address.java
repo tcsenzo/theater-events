@@ -1,4 +1,4 @@
-package com.senzo.qettal.theater;
+package com.senzo.qettal.theater_events.theater;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

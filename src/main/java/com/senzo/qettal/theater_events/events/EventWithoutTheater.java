@@ -1,9 +1,9 @@
-package com.senzo.qettal.events;
+package com.senzo.qettal.theater_events.events;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.senzo.qettal.theater.Theater;
+import com.senzo.qettal.theater_events.theater.Theater;
 
 public class EventWithoutTheater {
 

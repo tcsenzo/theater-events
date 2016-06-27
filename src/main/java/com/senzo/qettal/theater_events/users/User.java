@@ -1,4 +1,4 @@
-package com.senzo.qettal.users;
+package com.senzo.qettal.theater_events.users;
 
 import java.time.LocalDateTime;
 import java.util.Optional;

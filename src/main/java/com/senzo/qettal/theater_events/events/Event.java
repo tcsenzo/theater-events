@@ -1,4 +1,4 @@
-package com.senzo.qettal.events;
+package com.senzo.qettal.theater_events.events;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 import org.springframework.security.access.prepost.PreFilter;
 
-import com.senzo.qettal.theater.Theater;
+import com.senzo.qettal.theater_events.theater.Theater;
 
 @Entity
 @Table(name="event")

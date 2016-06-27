@@ -1,4 +1,4 @@
-package com.senzo.qettal.theater;
+package com.senzo.qettal.theater_events.theater;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
@@ -7,7 +7,7 @@ import java.util.Optional;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.senzo.qettal.users.User;
+import com.senzo.qettal.theater_events.users.User;
 
 @JsonSerialize
 @JsonInclude(NON_NULL)

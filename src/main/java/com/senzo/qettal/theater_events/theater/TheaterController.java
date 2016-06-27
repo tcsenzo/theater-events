@@ -1,4 +1,4 @@
-package com.senzo.qettal.theater;
+package com.senzo.qettal.theater_events.theater;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.senzo.qettal.security.LoggedUser;
-import com.senzo.qettal.users.User;
+import com.senzo.qettal.theater_events.security.LoggedUser;
+import com.senzo.qettal.theater_events.users.User;
 
 @RestController
 @RequestMapping("/theaters")

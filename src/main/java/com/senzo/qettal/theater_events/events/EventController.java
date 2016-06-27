@@ -1,4 +1,4 @@
-package com.senzo.qettal.events;
+package com.senzo.qettal.theater_events.events;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.senzo.qettal.security.LoggedUser;
-import com.senzo.qettal.theater.Theater;
-import com.senzo.qettal.theater.TheaterDTO;
-import com.senzo.qettal.theater.Theaters;
-import com.senzo.qettal.users.User;
+import com.senzo.qettal.theater_events.security.LoggedUser;
+import com.senzo.qettal.theater_events.theater.Theater;
+import com.senzo.qettal.theater_events.theater.TheaterDTO;
+import com.senzo.qettal.theater_events.theater.Theaters;
+import com.senzo.qettal.theater_events.users.User;
 
 @RestController
 @RequestMapping("/events")

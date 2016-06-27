@@ -1,4 +1,4 @@
-package com.senzo.qettal;
+package com.senzo.qettal.theater_events;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

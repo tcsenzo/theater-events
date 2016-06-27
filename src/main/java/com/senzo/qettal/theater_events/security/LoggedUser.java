@@ -1,4 +1,4 @@
-package com.senzo.qettal.security;
+package com.senzo.qettal.theater_events.security;
 
 import java.util.Optional;
 
@@ -8,8 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import com.senzo.qettal.users.User;
-import com.senzo.qettal.users.Users;
+import com.senzo.qettal.theater_events.users.User;
+import com.senzo.qettal.theater_events.users.Users;
 
 @Component
 public class LoggedUser {
