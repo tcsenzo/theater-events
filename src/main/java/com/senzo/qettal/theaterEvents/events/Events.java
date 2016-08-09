@@ -16,4 +16,6 @@ public interface Events {
 	List<Event> all();
 
 	Optional<Event> withId(Long eventId);
+
+	Optional<Event> availableWithId(Long eventId);
 }

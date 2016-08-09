@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,18 @@ public class EventDAO implements Events{
 	@Override
 	public Optional<Event> withId(Long id) {
 		return Optional.ofNullable(em.find(Event.class, id));
+	}
+
+	@Override
+	public Optional<Event> availableWithId(Long eventId) {
+		try{
+			String hql = "from Event e where e.id = :id and e.availableQuantity > 0 ";
+			return Optional.of(em.createQuery(hql, Event.class)
+					.setParameter("id", eventId)
+					.getSingleResult());
+		} catch (NoResultException e){
+			return Optional.empty();
+		}
 	}
 
 }

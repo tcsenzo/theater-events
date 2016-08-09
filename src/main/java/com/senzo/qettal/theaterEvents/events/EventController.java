@@ -51,6 +51,16 @@ public class EventController {
 		return new ResponseEntity<>(EventDTO.from(optionalEvent.get()), OK) ;
 	}
 	
+	
+	@RequestMapping(path="/checkout/{id}", method = GET)
+	public ResponseEntity<EventDTO> showForCheckout(@PathVariable("id") Long eventId) {
+		Optional<Event> optionalEvent =  events.availableWithId(eventId);
+		if(!optionalEvent.isPresent()){
+			return new ResponseEntity<>(NOT_FOUND);
+		}
+		return new ResponseEntity<>(EventDTO.from(optionalEvent.get()), OK) ;
+	}
+	
 	@RequestMapping(method = GET)
 	public EventListDTO list(@RequestParam(name="hours_limit", required=false) Long hoursLimit) {
 		List<Event> filteredEvents;
