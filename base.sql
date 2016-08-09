@@ -32,6 +32,7 @@ create table event (
 	name varchar(100) not null,
 	description varchar(255) not null,
 	price varchar(30) not null,
+	available_quantity bigint(20) not null,
 	scheduled_date datetime not null,
 	created_at datetime not null,
 	theater_id bigint(20) not null,
