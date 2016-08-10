@@ -82,4 +82,9 @@ public class Event {
 		return availableQuantity;
 	}
 
+	public void removeFromStock(Long quantity, Events events) {
+		this.availableQuantity -= quantity;
+		events.update(this);
+	}
+
 }

@@ -22,6 +22,12 @@ public class EventDAO implements Events{
 	public void save(Event event) {
 		em.persist(event);
 	}
+	
+	@Override
+	@Transactional
+	public void update(Event event) {
+		em.merge(event);
+	}
 
 	@Override
 	public List<Event> thatWillHappenBefore(LocalDateTime limit) {
@@ -42,11 +48,12 @@ public class EventDAO implements Events{
 	}
 
 	@Override
-	public Optional<Event> availableWithId(Long eventId) {
+	public Optional<Event> availableWithId(Long eventId, Long quantity) {
 		try{
-			String hql = "from Event e where e.id = :id and e.availableQuantity > 0 ";
+			String hql = "from Event e where e.id = :id and e.availableQuantity - :quantity >= 0 ";
 			return Optional.of(em.createQuery(hql, Event.class)
 					.setParameter("id", eventId)
+					.setParameter("quantity", quantity)
 					.getSingleResult());
 		} catch (NoResultException e){
 			return Optional.empty();

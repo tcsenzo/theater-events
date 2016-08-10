@@ -5,13 +5,13 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,13 +52,17 @@ public class EventController {
 	}
 	
 	
-	@RequestMapping(path="/checkout/{id}", method = GET)
-	public ResponseEntity<EventDTO> showForCheckout(@PathVariable("id") Long eventId) {
-		Optional<Event> optionalEvent =  events.availableWithId(eventId);
+	@RequestMapping(path="/checkout/{id}", method = PUT)
+	public ResponseEntity<EventDTO> checkout(@Valid @RequestBody CheckoutDTO checkout, @PathVariable("id") Long eventId) {
+		Optional<Event> optionalEvent =  events.availableWithId(eventId, checkout.getQuantity());
 		if(!optionalEvent.isPresent()){
 			return new ResponseEntity<>(NOT_FOUND);
 		}
-		return new ResponseEntity<>(EventDTO.from(optionalEvent.get()), OK) ;
+		
+		Event event = optionalEvent.get();
+		event.removeFromStock(checkout.getQuantity(), events);
+		
+		return new ResponseEntity<>(EventDTO.from(event), OK) ;
 	}
 	
 	@RequestMapping(method = GET)
