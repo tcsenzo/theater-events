@@ -211,7 +211,7 @@ The response will be a json in as the one bellow:
 
 Example:
 ```bash
-curl -b /tmp/cookies.txt http://localhost:8080/events/<id>
+curl http://localhost:8080/events/<id>
 ```
 
 The response will be a json in as the one bellow:
@@ -237,4 +237,39 @@ The response will be a json in as the one bellow:
 }
 ```
 
+### How to decrement events quantity
 
+Example:
+```bash
+curl -X PUT http://localhost:8080/events/checkout/<id>
+```
+
+
+Possible responses:
+
+- 200 - Event available and decremented with success
+
+```json
+{
+	"id": 1,
+	"name": "LOVE IS IN THE AIR",
+	"description": "Um evento para toda a familia",
+	"price": 22.0,
+	"theater": {
+		"name": "Teatro NET SP",
+		"address": {
+			"street": "Rua Olimpíadas",
+			"number": "360",
+			"district": "Vila Olimpia",
+			"city": "São Paulo",
+			"state": "SP",
+			"country": "Brasil",
+			"zip_code": "04551-000"
+		}
+	},
+	"scheduled_date": "2017-12-03T10:15:30"
+}
+```
+
+- 400 - Invalid or insufficient data
+- 404 - Not events with the specified id are available
