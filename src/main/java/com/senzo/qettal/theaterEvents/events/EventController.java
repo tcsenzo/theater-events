@@ -42,6 +42,7 @@ public class EventController {
 	@Autowired
 	private LoggedUser loggedUser;
 	
+	@AllowUnloggedUsers
 	@RequestMapping(path="/{id}", method = GET)
 	public ResponseEntity<EventDTO> show(@PathVariable("id") Long eventId) {
 		Optional<Event> optionalEvent =  events.withId(eventId);
@@ -51,7 +52,7 @@ public class EventController {
 		return new ResponseEntity<>(EventDTO.from(optionalEvent.get()), OK) ;
 	}
 	
-	
+	@AllowUnloggedUsers
 	@RequestMapping(path="/checkout/{id}", method = PUT)
 	public ResponseEntity<EventDTO> checkout(@Valid @RequestBody CheckoutDTO checkout, @PathVariable("id") Long eventId) {
 		Optional<Event> optionalEvent =  events.availableWithId(eventId, checkout.getQuantity());
@@ -65,6 +66,7 @@ public class EventController {
 		return new ResponseEntity<>(EventDTO.from(event), OK) ;
 	}
 	
+	@AllowUnloggedUsers
 	@RequestMapping(method = GET)
 	public EventListDTO list(@RequestParam(name="hours_limit", required=false) Long hoursLimit) {
 		List<Event> filteredEvents;

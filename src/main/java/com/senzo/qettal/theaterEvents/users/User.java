@@ -1,7 +1,6 @@
 package com.senzo.qettal.theaterEvents.users;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +17,8 @@ public class User {
 	private Long id;
 	private String name;
 	private String email;
-	private String password;
+	@Column(name="auth_id")
+	private String authId;
 	@Column(name="created_at")
 	private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -28,22 +28,14 @@ public class User {
 	User() {
 	}
 	
-	public User(String name, String email, String password) {
+	public User(String name, String email, String authId) {
 		this.name = name;
 		this.email = email;
-		this.password = password;
+		this.authId = authId;
 	}
 	
 	public String getEmail() {
 		return email;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	public Optional<User> save(Users users) {
-		return Optional.of(users.save(this));
 	}
 	
 }
