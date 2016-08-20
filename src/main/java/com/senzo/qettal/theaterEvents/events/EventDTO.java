@@ -25,6 +25,10 @@ public class EventDTO {
 	private String description;
 	@JsonProperty(required = true)
 	private BigDecimal price;
+	@JsonProperty(value="half_price", required = true)
+	private BigDecimal halfPrice;
+	@JsonProperty(value="original_price", required = true)
+	private BigDecimal originalPrice;
 	@JsonProperty(value = "available_quantity", required = true)
 	private Long availableQuantity;
 	@JsonProperty(value = "scheduled_date", required = true)
@@ -38,12 +42,14 @@ public class EventDTO {
 	EventDTO() {
 	}
 
-	private EventDTO(Long id, String name, String description, BigDecimal price, Long availableQuantity, LocalDateTime scheduledDate,
+	private EventDTO(Long id, String name, String description, BigDecimal price, BigDecimal halfPrice, BigDecimal originalPrice, Long availableQuantity, LocalDateTime scheduledDate,
 			TheaterDTO theater) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
+		this.halfPrice = halfPrice;
+		this.originalPrice = originalPrice;
 		this.availableQuantity = availableQuantity;
 		this.scheduledDate = scheduledDate;
 		this.theater = theater;
@@ -51,12 +57,12 @@ public class EventDTO {
 
 	public static EventDTO from(Event event) {
 		Theater theater = event.getTheater();
-		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getPrice(),
-				event.getAvailableQuantity(), event.getScheduledDate(), TheaterDTO.from(theater));
+		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getPrice(), event.getHalfPrice(),
+				event.getOriginalPrice(), event.getAvailableQuantity(), event.getScheduledDate(), TheaterDTO.from(theater));
 	}
 
 	public EventWithoutTheater toModel() {
-		return new EventWithoutTheater(name, description, price, availableQuantity, scheduledDate);
+		return new EventWithoutTheater(name, description, price, originalPrice, availableQuantity, scheduledDate);
 	}
 
 	@JsonIgnore

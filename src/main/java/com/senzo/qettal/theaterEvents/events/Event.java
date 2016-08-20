@@ -24,6 +24,8 @@ public class Event {
 	private String name;
 	private String description;
 	private BigDecimal price;
+	@Column(name = "original_price")
+	private BigDecimal originalPrice;
 	@Column(name = "available_quantity")
 	private Long availableQuantity;
 	@ManyToOne
@@ -40,10 +42,11 @@ public class Event {
 	Event() {
 	}
 
-	public Event(String name, String description, BigDecimal price, Long availableQuantity,  LocalDateTime scheduledDate, Theater theater) {
+	public Event(String name, String description, BigDecimal price, BigDecimal originalPrice, Long availableQuantity,  LocalDateTime scheduledDate, Theater theater) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
+		this.originalPrice = originalPrice;
 		this.availableQuantity = availableQuantity;
 		this.scheduledDate = scheduledDate;
 		this.theater = theater;
@@ -59,6 +62,14 @@ public class Event {
 
 	public BigDecimal getPrice() {
 		return this.price;
+	}
+	
+	public BigDecimal getHalfPrice() {
+		return this.price.divide(new BigDecimal("2"));
+	}
+
+	public BigDecimal getOriginalPrice() {
+		return originalPrice;
 	}
 
 	public LocalDateTime getScheduledDate() {
@@ -86,5 +97,6 @@ public class Event {
 		this.availableQuantity -= quantity;
 		events.update(this);
 	}
+
 
 }
