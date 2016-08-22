@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.senzo.qettal.theaterEvents.events.AllowUnloggedUsers;
 import com.senzo.qettal.theaterEvents.users.User;
 import com.senzo.qettal.theaterEvents.users.Users;
 

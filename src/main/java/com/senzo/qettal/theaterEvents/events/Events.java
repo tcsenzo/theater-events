@@ -1,6 +1,5 @@
 package com.senzo.qettal.theaterEvents.events;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,9 +9,7 @@ public interface Events {
 
 	void update(Event event);
 
-	public List<Event> thatWillHappenBefore(LocalDateTime limit);
-
-	List<Event> all();
+	List<Event> all(Long hoursLimit, String q);
 
 	Optional<Event> withId(Long eventId);
 

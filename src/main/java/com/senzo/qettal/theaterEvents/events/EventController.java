@@ -7,8 +7,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.senzo.qettal.theaterEvents.security.AllowUnloggedUsers;
 import com.senzo.qettal.theaterEvents.security.LoggedUser;
 import com.senzo.qettal.theaterEvents.theater.Theater;
 import com.senzo.qettal.theaterEvents.theater.TheaterDTO;
@@ -68,13 +67,8 @@ public class EventController {
 	
 	@AllowUnloggedUsers
 	@RequestMapping(method = GET)
-	public EventListDTO list(@RequestParam(name="hours_limit", required=false) Long hoursLimit) {
-		List<Event> filteredEvents;
-		if(hoursLimit == null ){
-			filteredEvents = events.all();
-		} else {
-			filteredEvents = events.thatWillHappenBefore(LocalDateTime.now().plus(hoursLimit, ChronoUnit.HOURS));
-		}
+	public EventListDTO list(@RequestParam(name="hours_limit", required=false) Long hoursLimit, @RequestParam(name="q", required=false) String q) {
+		List<Event> filteredEvents = events.all(hoursLimit, q);
 		return EventListDTO.from(filteredEvents);
 	}
 	

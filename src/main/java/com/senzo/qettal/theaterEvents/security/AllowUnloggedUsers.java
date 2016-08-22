@@ -1,4 +1,4 @@
-package com.senzo.qettal.theaterEvents.events;
+package com.senzo.qettal.theaterEvents.security;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

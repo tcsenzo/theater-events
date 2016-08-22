@@ -2,6 +2,7 @@
 
 - Import the project as an Existing Maven Project at eclipse
 - Import base.sql into your theaterEvents database:
+
 ```bash
 mysql -u root theaterEvents < base.sql
 ``` 
@@ -153,8 +154,9 @@ List example:
 curl -b /tmp/cookies.txt http://localhost:8080/events
 ```
 
-#### Optional parameter - hours_limit
-Sets a limit in hours to the events scheduled_date
+#### Optional parameters
+ - hours_limit: Sets a limit in hours to the events scheduled_date
+ - q: Especifies the event's name chunk you want to search by
 
 
 The response will be a json in as the one bellow:
@@ -223,7 +225,6 @@ Example:
 ```bash
  curl -X PUT -H "Content-Type:application/json" http://localhost:8080/events/checkout/1 --data "{\"quantity\":1}"
 ```
-
 
 Possible responses:
 

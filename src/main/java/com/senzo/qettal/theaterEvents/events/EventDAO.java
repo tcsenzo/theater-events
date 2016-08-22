@@ -1,11 +1,19 @@
 package com.senzo.qettal.theaterEvents.events;
 
-import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
+
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,19 +38,6 @@ public class EventDAO implements Events{
 	}
 
 	@Override
-	public List<Event> thatWillHappenBefore(LocalDateTime limit) {
-		return em.createQuery("from Event where scheduledDate < :limit", Event.class)
-				.setParameter("limit", limit)
-				.getResultList();
-	}
-
-	@Override
-	public List<Event> all() {
-		return em.createQuery("from Event", Event.class)
-				.getResultList();
-	}
-
-	@Override
 	public Optional<Event> withId(Long id) {
 		return Optional.ofNullable(em.find(Event.class, id));
 	}
@@ -58,6 +53,22 @@ public class EventDAO implements Events{
 		} catch (NoResultException e){
 			return Optional.empty();
 		}
+	}
+
+	@Override
+	public List<Event> all(Long hoursLimit, String q) {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Event> query = builder.createQuery(Event.class);
+		Root<Event> e = query.from(Event.class);
+		List<Predicate> ps = new ArrayList<>();
+		if(q != null){
+			ps.add(builder.like(e.get("name"), "%"+q+"%"));
+		}
+		if(hoursLimit != null){
+			ps.add(builder.lessThan(e.get("scheduledDate"), now().plus(hoursLimit, ChronoUnit.HOURS)));
+		}
+		TypedQuery<Event> typedQuery = em.createQuery(query.where(ps.toArray(new Predicate[ps.size()])));
+		return typedQuery.getResultList();
 	}
 
 }
