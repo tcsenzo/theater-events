@@ -26,13 +26,14 @@ public class TheaterDTO {
 	TheaterDTO() {
 	}
 	
-	private TheaterDTO(String name, AddressDTO address) {
+	private TheaterDTO(String name, AddressDTO address, Long id) {
 		this.name = name;
 		this.address = address;
+		this.id = id;
 	}
 
 	public static TheaterDTO from(Theater theater) {
-		return new TheaterDTO(theater.getName(), AddressDTO.from(theater.getAddress()));
+		return new TheaterDTO(theater.getName(), AddressDTO.from(theater.getAddress()), theater.getId());
 	}
 
 	public Theater toModel(User owner) {
