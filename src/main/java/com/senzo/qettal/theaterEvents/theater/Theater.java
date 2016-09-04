@@ -1,18 +1,22 @@
 package com.senzo.qettal.theaterEvents.theater;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.senzo.qettal.theaterEvents.events.Event;
 import com.senzo.qettal.theaterEvents.users.User;
 
 
@@ -30,6 +34,8 @@ public class Theater {
 	@ManyToOne
 	@JoinColumn(name="owner_id")
 	private User owner;
+	@OneToMany(mappedBy = "theater", fetch = FetchType.EAGER)
+	private List<Event> events;
 	
 	/**
 	 * @deprecated Hibernate eyes only
@@ -68,6 +74,10 @@ public class Theater {
 			return Optional.of(theaters.save(this));
 		}
 		return theaters.findById(id);
+	}
+
+	public List<Event> getEvents() {
+		return events;
 	}
 	
 }

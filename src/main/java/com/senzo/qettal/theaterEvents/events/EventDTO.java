@@ -64,6 +64,11 @@ public class EventDTO {
 	public EventWithoutTheater toModel() {
 		return new EventWithoutTheater(name, description, price, originalPrice, availableQuantity, scheduledDate);
 	}
+	
+	public static EventDTO withoutTheater(Event event) {
+		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getPrice(), event.getHalfPrice(),
+				event.getOriginalPrice(), event.getAvailableQuantity(), event.getScheduledDate(), null);
+	}
 
 	@JsonIgnore
 	public Optional<TheaterDTO> getTheaterDTO() {

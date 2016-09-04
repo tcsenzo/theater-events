@@ -25,7 +25,7 @@ public class TheaterListDTO {
 	}
 
 	public static TheaterListDTO from(List<Theater> theaters) {
-		return new TheaterListDTO(theaters.stream().map(TheaterDTO::from).collect(toList()));
+		return new TheaterListDTO(theaters.stream().map(TheaterDTO::withoutEvents).collect(toList()));
 	}
 
 }

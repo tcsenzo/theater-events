@@ -1,5 +1,8 @@
 package com.senzo.qettal.theaterEvents.theater;
 
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -8,8 +11,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +42,15 @@ public class TheaterController {
 			.toModel(optionalUser.get())
 			.findOrSave(theaters);
 		
-		return new ResponseEntity<String>(HttpStatus.CREATED);
+		return new ResponseEntity<String>(CREATED);
+	}
+	
+	@RequestMapping(path = "/{theaterId}", method = GET)
+	public ResponseEntity<TheaterDTO> details(@PathVariable("theaterId") Long theaterId) {
+		Optional<Theater> optionalTheater = theaters.findById(theaterId);
+		if(!optionalTheater.isPresent()){
+			return new ResponseEntity<>(NOT_FOUND);
+		}
+		return new ResponseEntity<>(TheaterDTO.from(optionalTheater.get()), OK);
 	}
 }
