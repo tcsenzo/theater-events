@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.senzo.qettal.theaterEvents.users.User;
+
 @Component
 public class TheaterDAO implements Theaters {
 
@@ -27,9 +29,10 @@ public class TheaterDAO implements Theaters {
 		return Optional.ofNullable(em.find(Theater.class, id));
 	}
 
-	@Override
-	public List<Theater> all() {
-		return em.createQuery("from Theater", Theater.class).getResultList();
+	public List<Theater> from(User user) {
+		return em.createQuery("from Theater where owner = :owner", Theater.class)
+				.setParameter("owner", user)
+				.getResultList();
 	}
 
 }

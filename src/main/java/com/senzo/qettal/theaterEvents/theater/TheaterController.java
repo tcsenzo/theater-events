@@ -26,10 +26,9 @@ public class TheaterController {
 	@Autowired
 	private LoggedUser loggedUser;
 	
-	
 	@RequestMapping(method = GET)
-	public TheaterListDTO list() {
-		return TheaterListDTO.from(theaters.all());
+	public TheaterListDTO myTheaters() {
+		return TheaterListDTO.from(theaters.from(loggedUser.getUser().get()));
 	}
 	
 	@RequestMapping(method = POST)
