@@ -62,7 +62,7 @@ Possible responses:
 - 202 - Theater created
 - 400 - Invalid or insufficient data
 
-### How to list all the theaters (REQUIRES LOGIN)
+### How to list the theaters created by me? (REQUIRES LOGIN)
 
 Example:
 
@@ -71,9 +71,11 @@ curl -b /tmp/cookies.txt http://localhost:8080/theaters
 ```
 
 The response will be a json in as the one bellow:
+
 ```json
 {
 	"theaters": [{
+        "id": 1,
 		"name": "Teatro NET SP",
 		"address": {
 			"street": "Rua Olimpíadas",
@@ -88,6 +90,75 @@ The response will be a json in as the one bellow:
 }
 ```
 
+### How to get details about one
+
+Example:
+
+```bash
+curl -b /tmp/cookies.txt http://localhost:8080/theaters/1
+```
+
+The response will be a json in as the one bellow:
+
+```json
+{
+    "id": 1,
+    "name": "Teatro NET SP",
+    "address": {
+        "city": "S\u00e3o Paulo",
+        "country": "Brasil",
+        "district": "Vila Olimpia",
+        "number": "360",
+        "state": "SP",
+        "street": "Rua Olimp\u00edadas",
+        "zip_code": "04551-000"
+    },
+    "events": [
+        {
+            "available_quantity": 980,
+            "description": "Um evento para toda a familia",
+            "half_price": 11.0,
+            "id": 1,
+            "name": "Evento maroto",
+            "original_price": 50.0,
+            "price": 22.0,
+            "scheduled_date": "2017-12-03T10:15:30"
+        },
+        {
+            "available_quantity": 1000,
+            "description": "Um evento para toda a familia",
+            "half_price": 11.0,
+            "id": 2,
+            "name": "Evento maroto",
+            "original_price": 50.0,
+            "price": 22.0,
+            "scheduled_date": "2017-12-03T10:15:30"
+        },
+        {
+            "available_quantity": 20,
+            "description": "Um evento para toda a familia",
+            "half_price": 11.0,
+            "id": 3,
+            "name": "Evento maroto",
+            "original_price": 50.0,
+            "price": 22.0,
+            "scheduled_date": "2017-12-03T10:15:30"
+        },
+        {
+            "available_quantity": 20,
+            "description": "Um evento para toda a familia",
+            "half_price": 11.0,
+            "id": 4,
+            "name": "Love is in the air",
+            "original_price": 50.0,
+            "price": 22.0,
+            "scheduled_date": "2016-08-22T22:15:30"
+        }
+    ]
+}
+
+```
+
 ## Events
 
 ### How to create one (REQUIRES LOGIN)
@@ -98,7 +169,6 @@ The response will be a json in as the one bellow:
 	"description": "Um evento para toda a familia",
 	"price": "22.0",
 	"original_price": 50.0,
-	"half_price": 11.0,
 	"available_quantity": 20,
 	"scheduled_date": "2017-12-03T10:15:30",
 	"theater": {
