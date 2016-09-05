@@ -24,6 +24,8 @@ public class EventDTO {
 	@JsonProperty(required = true)
 	private String description;
 	@JsonProperty(required = true)
+	private String image;
+	@JsonProperty(required = true)
 	private BigDecimal price;
 	@JsonProperty(value="half_price", required = true)
 	private BigDecimal halfPrice;
@@ -42,11 +44,12 @@ public class EventDTO {
 	EventDTO() {
 	}
 
-	private EventDTO(Long id, String name, String description, BigDecimal price, BigDecimal halfPrice, BigDecimal originalPrice, Long availableQuantity, LocalDateTime scheduledDate,
+	private EventDTO(Long id, String name, String description, String image, BigDecimal price, BigDecimal halfPrice, BigDecimal originalPrice, Long availableQuantity, LocalDateTime scheduledDate,
 			TheaterDTO theater) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.image = image;
 		this.price = price;
 		this.halfPrice = halfPrice;
 		this.originalPrice = originalPrice;
@@ -57,7 +60,7 @@ public class EventDTO {
 
 	public static EventDTO from(Event event) {
 		Theater theater = event.getTheater();
-		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getPrice(), event.getHalfPrice(),
+		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getImage(), event.getPrice(), event.getHalfPrice(),
 				event.getOriginalPrice(), event.getAvailableQuantity(), event.getScheduledDate(), TheaterDTO.from(theater));
 	}
 
@@ -66,7 +69,7 @@ public class EventDTO {
 	}
 	
 	public static EventDTO withoutTheater(Event event) {
-		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getPrice(), event.getHalfPrice(),
+		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getImage(), event.getPrice(), event.getHalfPrice(),
 				event.getOriginalPrice(), event.getAvailableQuantity(), event.getScheduledDate(), null);
 	}
 
