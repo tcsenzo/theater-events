@@ -33,7 +33,6 @@ public class Event {
 	private Theater theater;
 	@Column(name = "scheduled_date")
 	private LocalDateTime scheduledDate;
-	private String image = "http://lorempixel.com/400/200/";
 	@Column(name = "created_at")
 	private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -78,7 +77,7 @@ public class Event {
 	}
 	
 	public String getImage() {
-		return image;
+		return "http://lorempixel.com/100/100/";
 	}
 
 	public Event save(Events events) {
