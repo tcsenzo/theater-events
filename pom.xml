@@ -78,7 +78,6 @@
 						</goals>
 					</execution>
 				</executions>
-
 			</plugin>
 
 			<plugin>
