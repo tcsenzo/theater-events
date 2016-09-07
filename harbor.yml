@@ -1,0 +1,12 @@
+imagetag: leocwolter/theater-events
+downloadpath: build
+s3:
+  bucket: prod.qettal.config
+  basepath: theater-events
+files:
+  - s3path: application.properties
+    filename: application.properties
+    permission: 0644
+commands:
+  - mvn clean package
+  - cp target/theater-events*.jar build/theater-events.jar
