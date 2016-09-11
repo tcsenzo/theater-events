@@ -11,7 +11,19 @@ docker run --name mysql -e MYSQL_DATABASE=theaterEvents -e MYSQL_ROOT_PASSWORD=<
 
 ```
 
-- Run the checkout container linked with the mysql instance:
+- Pull the new version 
+
+```bash
+docker pull leocwolter/theater-events
+```
+
+- Stop and remove the running container
+```
+docker stop theater-events
+docker rm theater-events
+```
+
+- Run the container:
 
 ```bash
 docker run --name events -p 8080:8080 --link mysql:mysql -d leocwolter/theater-events
