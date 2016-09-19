@@ -30,7 +30,7 @@ public class UserDAO implements Users {
 					.setParameter("email", email)
 					.setParameter("authId", authId)
 					.getSingleResult());
-		} catch (NonUniqueResultException | NoResultException e){
+		} catch (NoResultException e){
 			return Optional.empty();
 		}
 	}
