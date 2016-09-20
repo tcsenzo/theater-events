@@ -1,6 +1,7 @@
 package com.senzo.qettal.theaterEvents.theater;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -48,11 +49,14 @@ public class TheaterController {
 	
 	@RequestMapping(path="/{theaterId}", method = PUT)
 	public ResponseEntity<String> update(@PathVariable("theaterId") Long theaterId, @Valid @RequestBody TheaterDTO theaterDTO){
-		Optional<User> optionalUser = loggedUser.getUser();
 		Optional<Theater> optionalTheater = theaters.findById(theaterId);
-		if(!optionalTheater.isPresent()){
+		if(!optionalTheater.isPresent())
 			return new ResponseEntity<String>(NOT_FOUND);
-		}
+
+		Optional<User> optionalUser = loggedUser.getUser();
+		if(!optionalTheater.get().isOwnedBy(optionalUser.get()))
+			return new ResponseEntity<String>(FORBIDDEN);
+
 		
 		Theater theater = theaterDTO
 			.toModel(optionalUser.get());

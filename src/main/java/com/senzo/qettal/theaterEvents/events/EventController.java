@@ -1,6 +1,7 @@
 package com.senzo.qettal.theaterEvents.events;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -88,6 +89,9 @@ public class EventController {
 		if(!optionalTheater.isPresent())
 			return new ResponseEntity<String>(NOT_FOUND);
 		
+		if(!optionalTheater.get().isOwnedBy(optionalUser.get()))
+			return new ResponseEntity<String>(FORBIDDEN);
+		
 		event
 			.toModel()
 			.withTheater(optionalTheater.get())
@@ -102,20 +106,19 @@ public class EventController {
 		if(!optionalTheaterDTO.isPresent())
 			return new ResponseEntity<String>(BAD_REQUEST);
 		
-		Optional<User> optionalUser = loggedUser.getUser();
-		
-		Optional<Theater> optionalTheater = optionalTheaterDTO
-				.get()
-				.toModel(optionalUser.get())
-				.findOrSave(theaters);
-		
+		Optional<Theater> optionalTheater = theaters.findById(optionalTheaterDTO.get().getId());
 		if(!optionalTheater.isPresent())
 			return new ResponseEntity<String>(NOT_FOUND);
+
+		Optional<User> optionalUser = loggedUser.getUser();
+		if(!optionalTheater.get().isOwnedBy(optionalUser.get()))
+			return new ResponseEntity<String>(FORBIDDEN);
 		
 		Event event = eventDTO
 			.toModel()
 			.withTheater(optionalTheater.get());
 		event.setId(eventId);
+		
 		events.update(event);
 		
 		return new ResponseEntity<String>(HttpStatus.OK);

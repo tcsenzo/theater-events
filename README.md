@@ -93,6 +93,24 @@ Possible responses:
 - 202 - Theater created
 - 400 - Invalid or insufficient data
 
+
+### How to update one (REQUIRES LOGIN)
+
+- Json template: the same above
+
+Example:
+
+```bash
+curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X PUT http://localhost:8080/theaters/1 --data "{\"name\": \"Teatro Editado\", \"address\": {	\"street\": \"Rua Editada\", \"number\": \"361\", \"district\": \"Vila Editada\", \"city\": \"São Editado\", \"state\": \"SP editado\", \"country\": \"Brasil editado\", \"zip_code\": \"04551-001\"}}"
+```
+
+Possible responses:
+
+- 200 - Theater updated
+- 400 - Invalid or insufficient data
+- 403 - Forbidden (the logged user is not the theaters owner)
+- 404 - Theater not found
+
 ### How to list the theaters created by me? (REQUIRES LOGIN)
 
 Example:
@@ -247,6 +265,22 @@ Possible responses:
 - 403 - Forbidden (the logged user is not the theaters owner)
 - 404 - Theater not found
 
+### How to update one (REQUIRES LOGIN)
+
+The json is the same above
+
+Example:
+
+```bash
+curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X PUT http://localhost:8080/events/1 --data "{\"name\" : \"Evento editado\", \"description\": \"Um evento editado\", \"price\": \"10.0\", \"original_price\":\"20.0\", \"available_quantity\": 10, \"scheduled_date\": \"2018-12-03T10:15:30\", \"theater\": {\"id\":1}}"
+```
+
+Possible responses:
+
+- 200 - Event updated
+- 400 - Invalid or insufficient data
+- 403 - Forbidden (the logged user is not the theaters owner)
+- 404 - Event not found
 
 ### How to list all the events
 

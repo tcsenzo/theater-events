@@ -57,4 +57,8 @@ public class TheaterDTO {
 		return theater;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 }

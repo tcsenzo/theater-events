@@ -79,5 +79,9 @@ public class Theater {
 	public List<Event> getEvents() {
 		return events;
 	}
+
+	public boolean isOwnedBy(User user) {
+		return owner.getId().equals(user.getId());
+	}
 	
 }
