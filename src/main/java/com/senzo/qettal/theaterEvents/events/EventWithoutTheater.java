@@ -13,8 +13,10 @@ public class EventWithoutTheater {
 	private BigDecimal price;
 	private LocalDateTime scheduledDate;
 	private BigDecimal originalPrice;
+	private Long id;
 
-	public EventWithoutTheater(String name, String description, BigDecimal price, BigDecimal originalPrice, Long availableQuantity, LocalDateTime scheduledDate) {
+	public EventWithoutTheater(Long id, String name, String description, BigDecimal price, BigDecimal originalPrice, Long availableQuantity, LocalDateTime scheduledDate) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.originalPrice = originalPrice;
@@ -24,7 +26,9 @@ public class EventWithoutTheater {
 	}
 
 	public Event withTheater(Theater theater) {
-		return new Event(name, description, price, originalPrice, availableQuantity,  scheduledDate, theater);
+		Event event = new Event(name, description, price, originalPrice, availableQuantity,  scheduledDate, theater);
+		event.setId(id);
+		return event;
 	}
 
 }

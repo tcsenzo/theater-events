@@ -61,11 +61,11 @@ public class EventDTO {
 	public static EventDTO from(Event event) {
 		Theater theater = event.getTheater();
 		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getImage(), event.getPrice(), event.getHalfPrice(),
-				event.getOriginalPrice(), event.getAvailableQuantity(), event.getScheduledDate(), TheaterDTO.from(theater));
+				event.getOriginalPrice(), event.getAvailableQuantity(), event.getScheduledDate(), TheaterDTO.withoutEvents(theater));
 	}
 
 	public EventWithoutTheater toModel() {
-		return new EventWithoutTheater(name, description, price, originalPrice, availableQuantity, scheduledDate);
+		return new EventWithoutTheater(id, name, description, price, originalPrice, availableQuantity, scheduledDate);
 	}
 	
 	public static EventDTO withoutTheater(Event event) {

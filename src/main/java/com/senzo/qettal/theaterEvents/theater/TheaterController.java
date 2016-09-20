@@ -5,6 +5,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import java.util.Optional;
 
@@ -43,6 +44,22 @@ public class TheaterController {
 			.findOrSave(theaters);
 		
 		return new ResponseEntity<String>(CREATED);
+	}
+	
+	@RequestMapping(path="/{theaterId}", method = PUT)
+	public ResponseEntity<String> update(@PathVariable("theaterId") Long theaterId, @Valid @RequestBody TheaterDTO theaterDTO){
+		Optional<User> optionalUser = loggedUser.getUser();
+		Optional<Theater> optionalTheater = theaters.findById(theaterId);
+		if(!optionalTheater.isPresent()){
+			return new ResponseEntity<String>(NOT_FOUND);
+		}
+		
+		Theater theater = theaterDTO
+			.toModel(optionalUser.get());
+		theater.setId(theaterId);
+		theaters.update(theater);
+		
+		return new ResponseEntity<String>(OK);
 	}
 	
 	@RequestMapping(path = "/{theaterId}", method = GET)

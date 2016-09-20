@@ -25,6 +25,12 @@ public class TheaterDAO implements Theaters {
 	}
 
 	@Override
+	@Transactional
+	public void update(Theater theater) {
+		em.merge(theater);
+	}
+	
+	@Override
 	public Optional<Theater> findById(Long id) {
 		return Optional.ofNullable(em.find(Theater.class, id));
 	}
@@ -34,5 +40,6 @@ public class TheaterDAO implements Theaters {
 				.setParameter("owner", user)
 				.getResultList();
 	}
+
 
 }

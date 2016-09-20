@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.senzo.qettal.theaterEvents.users.User;
 
 public interface Theaters {
+	void update(Theater theater);
 	Theater save(Theater theater);
 	Optional<Theater> findById(Long id);
 	List<Theater> from(User user);

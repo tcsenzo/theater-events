@@ -95,4 +95,29 @@ public class EventController {
 		
 		return new ResponseEntity<String>(HttpStatus.CREATED);
 	}
+	
+	@RequestMapping(path = "/{eventId}", method = PUT)
+	public ResponseEntity<String> update(@PathVariable("eventId") Long eventId, @Valid @RequestBody EventDTO eventDTO){
+		Optional<TheaterDTO> optionalTheaterDTO = eventDTO.getTheaterDTO();
+		if(!optionalTheaterDTO.isPresent())
+			return new ResponseEntity<String>(BAD_REQUEST);
+		
+		Optional<User> optionalUser = loggedUser.getUser();
+		
+		Optional<Theater> optionalTheater = optionalTheaterDTO
+				.get()
+				.toModel(optionalUser.get())
+				.findOrSave(theaters);
+		
+		if(!optionalTheater.isPresent())
+			return new ResponseEntity<String>(NOT_FOUND);
+		
+		Event event = eventDTO
+			.toModel()
+			.withTheater(optionalTheater.get());
+		event.setId(eventId);
+		events.update(event);
+		
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
 }

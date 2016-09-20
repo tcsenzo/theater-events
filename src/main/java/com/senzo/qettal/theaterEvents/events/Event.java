@@ -89,6 +89,10 @@ public class Event {
 		return theater;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -101,6 +105,5 @@ public class Event {
 		this.availableQuantity -= quantity;
 		events.update(this);
 	}
-
 
 }
