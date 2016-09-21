@@ -2,7 +2,7 @@ package com.senzo.qettal.theaterEvents.events;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,8 +15,8 @@ public class DateTimeLimitDTO {
 	@JsonProperty(value="last_hours_limit")
 	private Long lastHoursLimit;
 
-	public LocalDateTime getDate() {
-		return LocalDateTime.now().plus(lastHoursLimit, ChronoUnit.HOURS) ;
+	public Instant getDate() {
+		return Instant.now().plus(lastHoursLimit, ChronoUnit.HOURS) ;
 	}
 	
 }

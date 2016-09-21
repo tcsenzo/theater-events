@@ -1,7 +1,7 @@
 package com.senzo.qettal.theaterEvents.events;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import com.senzo.qettal.theaterEvents.theater.Theater;
 
@@ -11,11 +11,11 @@ public class EventWithoutTheater {
 	private String description;
 	private Long availableQuantity;
 	private BigDecimal price;
-	private LocalDateTime scheduledDate;
+	private Instant scheduledDate;
 	private BigDecimal originalPrice;
 	private Long id;
 
-	public EventWithoutTheater(Long id, String name, String description, BigDecimal price, BigDecimal originalPrice, Long availableQuantity, LocalDateTime scheduledDate) {
+	public EventWithoutTheater(Long id, String name, String description, BigDecimal price, BigDecimal originalPrice, Long availableQuantity, Instant scheduledDate) {
 		this.id = id;
 		this.name = name;
 		this.description = description;

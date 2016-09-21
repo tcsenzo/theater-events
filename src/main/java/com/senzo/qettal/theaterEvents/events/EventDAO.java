@@ -1,7 +1,8 @@
 package com.senzo.qettal.theaterEvents.events;
 
-import static java.time.LocalDateTime.now;
+import static java.time.Instant.now;
 
+import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;

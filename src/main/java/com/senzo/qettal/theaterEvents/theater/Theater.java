@@ -1,6 +1,6 @@
 package com.senzo.qettal.theaterEvents.theater;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +30,7 @@ public class Theater {
 	@Embedded
 	private Address address;
 	@Column(name="created_at")
-	private LocalDateTime createdAt = LocalDateTime.now();
+	private Instant createdAt = Instant.now();
 	@ManyToOne
 	@JoinColumn(name="owner_id")
 	private User owner;

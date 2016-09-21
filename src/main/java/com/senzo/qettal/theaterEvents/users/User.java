@@ -1,6 +1,6 @@
 package com.senzo.qettal.theaterEvents.users;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ public class User {
 	@Column(name="auth_id")
 	private String authId;
 	@Column(name="created_at")
-	private LocalDateTime createdAt = LocalDateTime.now();
+	private Instant createdAt = Instant.now();
 
 	/**
 	 * @deprecated Hibernate eyes only

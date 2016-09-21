@@ -1,7 +1,7 @@
 package com.senzo.qettal.theaterEvents.events;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,9 +32,9 @@ public class Event {
 	@JoinColumn(name = "theater_id")
 	private Theater theater;
 	@Column(name = "scheduled_date")
-	private LocalDateTime scheduledDate;
+	private Instant scheduledDate;
 	@Column(name = "created_at")
-	private LocalDateTime createdAt = LocalDateTime.now();
+	private Instant createdAt = Instant.now();
 
 	/**
 	 * @deprecated Hibernate eyes only
@@ -42,7 +42,7 @@ public class Event {
 	Event() {
 	}
 
-	public Event(String name, String description, BigDecimal price, BigDecimal originalPrice, Long availableQuantity,  LocalDateTime scheduledDate, Theater theater) {
+	public Event(String name, String description, BigDecimal price, BigDecimal originalPrice, Long availableQuantity,  Instant scheduledDate, Theater theater) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -72,7 +72,7 @@ public class Event {
 		return originalPrice;
 	}
 
-	public LocalDateTime getScheduledDate() {
+	public Instant getScheduledDate() {
 		return scheduledDate;
 	}
 	

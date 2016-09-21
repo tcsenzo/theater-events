@@ -11,11 +11,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +53,7 @@ public class EventController {
 	
 	@AllowUnloggedUsers
 	@RequestMapping(path="/checkout/{id}", method = PUT)
-	public ResponseEntity<EventDTO> checkout(@Valid @RequestBody CheckoutDTO checkout, @PathVariable("id") Long eventId) {
+	public ResponseEntity<EventDTO> checkout(@RequestBody CheckoutDTO checkout, @PathVariable("id") Long eventId) {
 		Optional<Event> optionalEvent =  events.availableWithId(eventId, checkout.getQuantity());
 		if(!optionalEvent.isPresent()){
 			return new ResponseEntity<>(NOT_FOUND);
@@ -74,7 +73,7 @@ public class EventController {
 	}
 	
 	@RequestMapping(method = POST)
-	public ResponseEntity<String> create(@Valid @RequestBody EventDTO event){
+	public ResponseEntity<String> create(@Validated @RequestBody EventDTO event){
 		Optional<TheaterDTO> optionalTheaterDTO = event.getTheaterDTO();
 		if(!optionalTheaterDTO.isPresent())
 			return new ResponseEntity<String>(BAD_REQUEST);
@@ -101,7 +100,7 @@ public class EventController {
 	}
 	
 	@RequestMapping(path = "/{eventId}", method = PUT)
-	public ResponseEntity<String> update(@PathVariable("eventId") Long eventId, @Valid @RequestBody EventDTO eventDTO){
+	public ResponseEntity<String> update(@PathVariable("eventId") Long eventId, @Validated @RequestBody EventDTO eventDTO){
 		Optional<TheaterDTO> optionalTheaterDTO = eventDTO.getTheaterDTO();
 		if(!optionalTheaterDTO.isPresent())
 			return new ResponseEntity<String>(BAD_REQUEST);
