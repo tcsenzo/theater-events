@@ -171,7 +171,7 @@ The response will be a json in as the one bellow:
             "name": "Evento maroto",
             "original_price": 50.0,
             "price": 22.0,
-            "scheduled_date": "2017-12-03T10:15:30"
+            "scheduled_date": "2017-12-03T10:15:30Z"
         },
         {
             "available_quantity": 1000,
@@ -181,7 +181,7 @@ The response will be a json in as the one bellow:
             "name": "Evento maroto",
             "original_price": 50.0,
             "price": 22.0,
-            "scheduled_date": "2017-12-03T10:15:30"
+            "scheduled_date": "2017-12-03T10:15:30Z"
         },
         {
             "available_quantity": 20,
@@ -191,7 +191,7 @@ The response will be a json in as the one bellow:
             "name": "Evento maroto",
             "original_price": 50.0,
             "price": 22.0,
-            "scheduled_date": "2017-12-03T10:15:30"
+            "scheduled_date": "2017-12-03T10:15:30Z"
         },
         {
             "available_quantity": 20,
@@ -201,7 +201,7 @@ The response will be a json in as the one bellow:
             "name": "Love is in the air",
             "original_price": 50.0,
             "price": 22.0,
-            "scheduled_date": "2016-08-22T22:15:30"
+            "scheduled_date": "2016-08-22T22:15:30Z"
         }
     ]
 }
@@ -219,7 +219,7 @@ The response will be a json in as the one bellow:
 	"price": "22.0",
 	"original_price": 50.0,
 	"available_quantity": 20,
-	"scheduled_date": "2017-12-03T10:15:30",
+	"scheduled_date": "2017-12-03T10:15:30Z",
 	"theater": {
 		"id": 1
 	}
@@ -229,7 +229,7 @@ The response will be a json in as the one bellow:
 Example:
 
 ```bash
-curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X POST http://localhost:8080/events --data "{\"name\" : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"price\": \"22.0\", \"original_price\":\"50.0\", \"available_quantity\": 20, \"scheduled_date\": \"2017-12-03T10:15:30\", \"theater\": {\"id\":1}}"
+curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X POST http://localhost:8080/events --data "{\"name\" : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"price\": \"22.0\", \"original_price\":\"50.0\", \"available_quantity\": 20, \"scheduled_date\": \"2017-12-03T10:15:30Z\", \"theater\": {\"id\":1}}"
 ```
 
 You can also send the theater information if it doesn't already exists on this service's database: (REQUIRES LOGIN)
@@ -242,7 +242,7 @@ You can also send the theater information if it doesn't already exists on this s
 	"original_price": 50.0,
 	"half_price": 11.0,
 	"available_quantity": "20",
-	"scheduled_date": "2017-12-03T10:15:30",
+	"scheduled_date": "2017-12-03T10:15:30Z",
 	"theater": {
 		"name": "Teatro NET SP",
 		"address": {
@@ -272,7 +272,7 @@ The json is the same above
 Example:
 
 ```bash
-curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X PUT http://localhost:8080/events/1 --data "{\"name\" : \"Evento editado\", \"description\": \"Um evento editado\", \"price\": \"10.0\", \"original_price\":\"20.0\", \"available_quantity\": 10, \"scheduled_date\": \"2018-12-03T10:15:30\", \"theater\": {\"id\":1}}"
+curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X PUT http://localhost:8080/events/1 --data "{\"name\" : \"Evento editado\", \"description\": \"Um evento editado\", \"price\": \"10.0\", \"original_price\":\"20.0\", \"available_quantity\": 10, \"scheduled_date\": \"2018-12-03T10:15:30Z\", \"theater\": {\"id\":1}}"
 ```
 
 Possible responses:
@@ -316,7 +316,7 @@ The response will be a json in as the one bellow:
 				"zip_code": "04551-000"
 			}
 		},
-		"scheduled_date": "2017-12-03T10:15:30"
+		"scheduled_date": "2017-12-03T10:15:30Z"
 	}]
 }
 ```
@@ -349,7 +349,7 @@ The response will be a json in as the one bellow:
 			"zip_code": "04551-000"
 		}
 	},
-	"scheduled_date": "2017-12-03T10:15:30"
+	"scheduled_date": "2017-12-03T10:15:30Z"
 }
 ```
 
@@ -383,7 +383,7 @@ Possible responses:
 			"zip_code": "04551-000"
 		}
 	},
-	"scheduled_date": "2017-12-03T10:15:30"
+	"scheduled_date": "2017-12-03T10:15:30Z"
 }
 ```
 

@@ -6,6 +6,11 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -19,8 +24,11 @@ public class TheaterDTO {
 	@JsonProperty
 	private Long id;
 	@JsonProperty
+	@NotBlank
+	@Size(min = 3)
 	private String name;
 	@JsonProperty
+	@Valid
 	private AddressDTO address;
 	@JsonProperty
 	private List<EventDTO> events;

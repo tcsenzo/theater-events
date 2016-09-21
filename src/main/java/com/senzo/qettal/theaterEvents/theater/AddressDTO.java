@@ -1,5 +1,7 @@
 package com.senzo.qettal.theaterEvents.theater;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,20 +12,28 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class AddressDTO {
 	
 	@JsonProperty(required=true)
+	@NotBlank
 	private String street;
 	@JsonProperty(required=true)
+	@NotBlank
 	private String number;
 	@JsonProperty
+	@NotBlank
 	private String complement;
 	@JsonProperty(required=true)
+	@NotBlank
 	private String district;
 	@JsonProperty(required=true)
+	@NotBlank
 	private String city;
 	@JsonProperty(required=true)
+	@NotBlank
 	private String state;
 	@JsonProperty(required=true)
+	@NotBlank
 	private String country;
 	@JsonProperty(value="zip_code", required=true)
+	@NotBlank
 	private String zipCode;
 
 	/**
