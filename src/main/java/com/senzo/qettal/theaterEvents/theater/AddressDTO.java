@@ -11,28 +11,27 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonInclude(Include.NON_NULL)
 public class AddressDTO {
 	
-	@JsonProperty(required=true)
+	@JsonProperty
 	@NotBlank
 	private String street;
-	@JsonProperty(required=true)
+	@JsonProperty
 	@NotBlank
 	private String number;
 	@JsonProperty
-	@NotBlank
 	private String complement;
-	@JsonProperty(required=true)
+	@JsonProperty
 	@NotBlank
 	private String district;
-	@JsonProperty(required=true)
+	@JsonProperty
 	@NotBlank
 	private String city;
-	@JsonProperty(required=true)
+	@JsonProperty
 	@NotBlank
 	private String state;
-	@JsonProperty(required=true)
+	@JsonProperty
 	@NotBlank
 	private String country;
-	@JsonProperty(value="zip_code", required=true)
+	@JsonProperty("zip_code")
 	@NotBlank
 	private String zipCode;
 
