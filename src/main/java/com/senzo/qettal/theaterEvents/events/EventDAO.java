@@ -46,10 +46,11 @@ public class EventDAO implements Events{
 	@Override
 	public Optional<Event> availableWithId(Long eventId, Long quantity) {
 		try{
-			String hql = "from Event e where e.id = :id and e.availableQuantity - :quantity >= 0 ";
+			String hql = "from Event e where e.id = :id and e.availableQuantity - :quantity >= 0 and e.scheduledDate > :now ";
 			return Optional.of(em.createQuery(hql, Event.class)
 					.setParameter("id", eventId)
 					.setParameter("quantity", quantity)
+					.setParameter("now", Instant.now())
 					.getSingleResult());
 		} catch (NoResultException e){
 			return Optional.empty();
@@ -66,7 +67,9 @@ public class EventDAO implements Events{
 			ps.add(builder.like(e.get("name"), "%"+q+"%"));
 		}
 		if(hoursLimit != null){
-			ps.add(builder.lessThan(e.get("scheduledDate"), now().plus(hoursLimit, ChronoUnit.HOURS)));
+			ps.add(builder.between(e.get("scheduledDate"), now(), now().plus(hoursLimit, ChronoUnit.HOURS)));
+		} else {
+			ps.add(builder.greaterThan(e.get("scheduledDate"), now()));
 		}
 		TypedQuery<Event> typedQuery = em.createQuery(query.where(ps.toArray(new Predicate[ps.size()])));
 		return typedQuery.getResultList();
