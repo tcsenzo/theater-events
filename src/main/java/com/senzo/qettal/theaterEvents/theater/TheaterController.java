@@ -1,5 +1,6 @@
 package com.senzo.qettal.theaterEvents.theater;
 
+import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -8,6 +9,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -30,10 +32,13 @@ public class TheaterController {
 	private Theaters theaters;
 	@Autowired
 	private LoggedUser loggedUser;
+	@Autowired
+	private TheaterDTOConverter converter;
 	
 	@RequestMapping(method = GET)
 	public TheaterListDTO myTheaters() {
-		return TheaterListDTO.from(theaters.from(loggedUser.getUser().get()));
+		List<Theater> myTheaters = theaters.from(loggedUser.getUser().get());
+		return new TheaterListDTO(myTheaters.stream().map(converter::withoutEvents).collect(toList()));
 	}
 	
 	@RequestMapping(method = POST)
@@ -72,6 +77,6 @@ public class TheaterController {
 		if(!optionalTheater.isPresent()){
 			return new ResponseEntity<>(NOT_FOUND);
 		}
-		return new ResponseEntity<>(TheaterDTO.from(optionalTheater.get()), OK);
+		return new ResponseEntity<>(converter.from(optionalTheater.get()), OK);
 	}
 }

@@ -23,6 +23,7 @@ public class Event {
 	private Long id;
 	private String name;
 	private String description;
+	private String image;
 	private BigDecimal price;
 	@Column(name = "original_price")
 	private BigDecimal originalPrice;
@@ -42,9 +43,10 @@ public class Event {
 	Event() {
 	}
 
-	public Event(String name, String description, BigDecimal price, BigDecimal originalPrice, Long availableQuantity,  Instant scheduledDate, Theater theater) {
+	public Event(String name, String  description, String image, BigDecimal price, BigDecimal originalPrice, Long availableQuantity,  Instant scheduledDate, Theater theater) {
 		this.name = name;
 		this.description = description;
+		this.image = image;
 		this.price = price;
 		this.originalPrice = originalPrice;
 		this.availableQuantity = availableQuantity;
@@ -52,6 +54,10 @@ public class Event {
 		this.theater = theater;
 	}
 
+	public String getImage() {
+		return image;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
@@ -76,10 +82,6 @@ public class Event {
 		return scheduledDate;
 	}
 	
-	public String getImage() {
-		return "http://lorempixel.com/100/100/";
-	}
-
 	public Event save(Events events) {
 		events.save(this);
 		return this;

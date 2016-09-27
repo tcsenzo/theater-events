@@ -1,3 +1,11 @@
+aws.s3.bucket.events=dev.qettal.tickets
+aws.s3.url=s3.amazonaws.com
+
+cloud.aws.credentials.instanceProfile=false
+cloud.aws.credentials.accessKey=
+cloud.aws.credentials.secretKey=
+cloud.aws.region.static=us-east-1
+
 qettal.datasource.jdbcUrl = jdbc:mysql://localhost/theaterEvents
 qettal.datasource.driverClassName = com.mysql.jdbc.Driver
 qettal.datasource.username=root

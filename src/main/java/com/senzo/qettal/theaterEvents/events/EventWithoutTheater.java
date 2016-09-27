@@ -14,11 +14,13 @@ public class EventWithoutTheater {
 	private Instant scheduledDate;
 	private BigDecimal originalPrice;
 	private Long id;
+	private String image;
 
-	public EventWithoutTheater(Long id, String name, String description, BigDecimal price, BigDecimal originalPrice, Long availableQuantity, Instant scheduledDate) {
+	public EventWithoutTheater(Long id, String name, String description, String image, BigDecimal price, BigDecimal originalPrice, Long availableQuantity, Instant scheduledDate) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.image = image;
 		this.originalPrice = originalPrice;
 		this.availableQuantity = availableQuantity;
 		this.price = price;
@@ -26,7 +28,7 @@ public class EventWithoutTheater {
 	}
 
 	public Event withTheater(Theater theater) {
-		Event event = new Event(name, description, price, originalPrice, availableQuantity,  scheduledDate, theater);
+		Event event = new Event(name, description, image, price, originalPrice, availableQuantity,  scheduledDate, theater);
 		event.setId(id);
 		return event;
 	}

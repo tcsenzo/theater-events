@@ -1,7 +1,5 @@
 package com.senzo.qettal.theaterEvents.theater;
 
-import static java.util.stream.Collectors.toList;
-
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,18 +12,13 @@ public class TheaterListDTO {
 	private List<TheaterDTO> theatersDTOs;
 
 	/**
-	 * @deprecated Use the factory method
+	 * @deprecated Jackson eyes only
 	 */
-	private TheaterListDTO() {
+	TheaterListDTO() {
 	}
-
 	
-	private TheaterListDTO(List<TheaterDTO> theatersDTOs) {
+	TheaterListDTO(List<TheaterDTO> theatersDTOs) {
 		this.theatersDTOs = theatersDTOs;
-	}
-
-	public static TheaterListDTO from(List<Theater> theaters) {
-		return new TheaterListDTO(theaters.stream().map(TheaterDTO::withoutEvents).collect(toList()));
 	}
 
 }

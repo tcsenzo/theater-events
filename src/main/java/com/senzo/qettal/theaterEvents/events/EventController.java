@@ -10,6 +10,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.senzo.qettal.theaterEvents.security.AllowUnloggedUsers;
 import com.senzo.qettal.theaterEvents.security.LoggedUser;
@@ -41,6 +43,12 @@ public class EventController {
 	@Autowired
 	private LoggedUser loggedUser;
 	
+	@Autowired
+	private EventDTOConverter converter;
+		
+	@Autowired
+	private EventsImageUploader uploader;
+	
 	@AllowUnloggedUsers
 	@RequestMapping(path="/{id}", method = GET)
 	public ResponseEntity<EventDTO> show(@PathVariable("id") Long eventId) {
@@ -48,7 +56,7 @@ public class EventController {
 		if(!optionalEvent.isPresent()){
 			return new ResponseEntity<>(NOT_FOUND);
 		}
-		return new ResponseEntity<>(EventDTO.from(optionalEvent.get()), OK) ;
+		return new ResponseEntity<>(converter.from(optionalEvent.get()), OK) ;
 	}
 	
 	@AllowUnloggedUsers
@@ -62,18 +70,19 @@ public class EventController {
 		Event event = optionalEvent.get();
 		event.removeFromStock(checkout.getQuantity(), events);
 		
-		return new ResponseEntity<>(EventDTO.from(event), OK) ;
+		return new ResponseEntity<>(converter.from(event), OK) ;
 	}
 	
 	@AllowUnloggedUsers
 	@RequestMapping(method = GET)
 	public EventListDTO list(@RequestParam(name="hours_limit", required=false) Long hoursLimit, @RequestParam(name="q", required=false) String q) {
 		List<Event> filteredEvents = events.all(hoursLimit, q);
-		return EventListDTO.from(filteredEvents);
+		List<EventDTO> dtos = filteredEvents.stream().map(e -> converter.from(e)).collect(Collectors.toList());
+		return new EventListDTO(dtos);
 	}
 	
 	@RequestMapping(method = POST)
-	public ResponseEntity<String> create(@Validated @RequestBody EventDTO event){
+	public ResponseEntity<String> finish(@Validated @RequestBody EventDTO event){
 		Optional<TheaterDTO> optionalTheaterDTO = event.getTheaterDTO();
 		if(!optionalTheaterDTO.isPresent())
 			return new ResponseEntity<String>(BAD_REQUEST);
@@ -98,6 +107,13 @@ public class EventController {
 		
 		return new ResponseEntity<String>(HttpStatus.CREATED);
 	}
+	
+	@RequestMapping(path = "/image", method = POST)
+	public ResponseEntity<ImageUploadResultDTO> upload(@RequestParam("image") MultipartFile file){
+		ImageUploadResultDTO image= uploader.upload(file);
+		return new ResponseEntity<>(image, HttpStatus.CREATED);
+	}
+
 	
 	@RequestMapping(path = "/{eventId}", method = PUT)
 	public ResponseEntity<String> update(@PathVariable("eventId") Long eventId, @Validated @RequestBody EventDTO eventDTO){

@@ -212,10 +212,20 @@ The response will be a json in as the one bellow:
 
 ### How to create one (REQUIRES LOGIN)
 
+First you need to upload the events image, you can use the following endpoint to do so
+
+```bash
+curl -b /tmp/cookies.txt -X POST -H "Content-type: multipart/form-data" http://localhost:8080/events/image -F "image=@<path_for_your_image>"
+```
+
+This will return the uploaded image name, which will be used to create the actual event
+
+
 ```json
 {
 	"name": "LOVE IS IN THE AIR",
 	"description": "Um evento para toda a familia",
+	"image" : <image-name-returned-by-the-upload>, 
 	"price": "22.0",
 	"original_price": 50.0,
 	"available_quantity": 20,
@@ -229,7 +239,7 @@ The response will be a json in as the one bellow:
 Example:
 
 ```bash
-curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X POST http://localhost:8080/events --data "{\"name\" : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"price\": \"22.0\", \"original_price\":\"50.0\", \"available_quantity\": 20, \"scheduled_date\": \"2017-12-03T10:15:30Z\", \"theater\": {\"id\":1}}"
+curl -b /tmp/cookies.txt -H "Content-Type:application/json" -X POST http://localhost:8080/events --data "{\"name\" : \"Evento maroto\", \"description\": \"Um evento para toda a familia\", \"image\": \"<image-name-returned-by-the-upload>\", \"price\": \"22.0\", \"original_price\":\"50.0\", \"available_quantity\": 20, \"scheduled_date\": \"2017-12-03T10:15:30Z\", \"theater\": {\"id\":1}}"
 ```
 
 You can also send the theater information if it doesn't already exists on this service's database: (REQUIRES LOGIN)
@@ -240,7 +250,7 @@ You can also send the theater information if it doesn't already exists on this s
 	"description": "Um evento para toda a familia",
 	"price": "22.0",
 	"original_price": 50.0,
-	"half_price": 11.0,
+	"image" : <image-name-returned-by-the-upload>,
 	"available_quantity": "20",
 	"scheduled_date": "2017-12-03T10:15:30Z",
 	"theater": {
@@ -286,7 +296,7 @@ Possible responses:
 
 List example:
 ```bash
-curl -b /tmp/cookies.txt http://localhost:8080/events
+curl http://localhost:8080/events
 ```
 
 #### Optional parameters
@@ -301,6 +311,7 @@ The response will be a json in as the one bellow:
 		"id": 1,
 		"name": "LOVE IS IN THE AIR",
 		"description": "Um evento para toda a familia",
+		"image": 
 		"price": 22.0,
 		"original_price": 50.0,
 		"half_price": 11.0,

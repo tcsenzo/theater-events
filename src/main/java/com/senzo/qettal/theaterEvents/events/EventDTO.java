@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.senzo.qettal.theaterEvents.theater.Theater;
 import com.senzo.qettal.theaterEvents.theater.TheaterDTO;
 
 @JsonSerialize
@@ -36,6 +35,7 @@ public class EventDTO {
 	@Size(min = 10)
 	private String description;
 	@JsonProperty(required = true)
+	@NotBlank
 	private String image;
 	@JsonProperty(required = true)
 	@NotNull
@@ -65,7 +65,7 @@ public class EventDTO {
 	EventDTO() {
 	}
 
-	private EventDTO(Long id, String name, String description, String image, BigDecimal price, BigDecimal halfPrice,
+	EventDTO(Long id, String name, String description, String image, BigDecimal price, BigDecimal halfPrice,
 			BigDecimal originalPrice, Long availableQuantity, Instant scheduledDate, TheaterDTO theater) {
 		this.id = id;
 		this.name = name;
@@ -79,21 +79,9 @@ public class EventDTO {
 		this.theater = theater;
 	}
 
-	public static EventDTO from(Event event) {
-		Theater theater = event.getTheater();
-		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getImage(), event.getPrice(),
-				event.getHalfPrice(), event.getOriginalPrice(), event.getAvailableQuantity(), event.getScheduledDate(),
-				TheaterDTO.withoutEvents(theater));
-	}
 
 	public EventWithoutTheater toModel() {
-		return new EventWithoutTheater(id, name, description, price, originalPrice, availableQuantity, scheduledDate);
-	}
-
-	public static EventDTO withoutTheater(Event event) {
-		return new EventDTO(event.getId(), event.getName(), event.getDescription(), event.getImage(), event.getPrice(),
-				event.getHalfPrice(), event.getOriginalPrice(), event.getAvailableQuantity(), event.getScheduledDate(),
-				null);
+		return new EventWithoutTheater(id, name, description, image, price, originalPrice, availableQuantity, scheduledDate);
 	}
 
 	@JsonIgnore
